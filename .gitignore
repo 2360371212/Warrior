@@ -1,0 +1,25 @@
+# Visual Studio
+.vs/
+*.sln
+*.slnx
+
+# Unreal Engine generated files
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+
+# Visual Studio build files
+*.VC.db
+*.VC.opendb
+*.opensdf
+*.sdf
+*.suo
+*.user
+
+# Compiled files
+*.dll
+*.pdb
+*.obj
+*.exp
+*.lib
