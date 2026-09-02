@@ -10,6 +10,8 @@
 #include "EnhancedInputSubsystems.h"
 #include "Components/Input/WarriorInputComponent.h"
 #include "WarriorGameplayTags.h"
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "Datasets/StartUpData/DataAsset_HeroStartUpData.h"
 
 #include "WarriorDebugHelper.h"
 
@@ -38,11 +40,22 @@ AWarriorHeroCharacter::AWarriorHeroCharacter()
 
 }
 
+void AWarriorHeroCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	
+	if (!CharacterStartUpData.IsNull())
+	{
+		if (UDataAsset_StartUpDataBase* LoadedData = CharacterStartUpData.LoadSynchronous()) {
+			LoadedData->GiveToAbilitySystemComponent(WarriorAbilitySystemComponent);
+		}
+	}
+
+}
+
 void AWarriorHeroCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	Debug::Print(TEXT("Working"));
-
 }
 
 void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -59,8 +72,6 @@ void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	
 	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &AWarriorHeroCharacter::Input_Move);
 	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &AWarriorHeroCharacter::Input_Look);
-	
-
 }
 
 void AWarriorHeroCharacter::Input_Move(const FInputActionValue& InputActionValue)
