@@ -4,13 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "WarriorBaseCharacter.h"
-
+#include "GameplayTagContainer.h"
 #include "WarriorHeroCharacter.generated.h"
 
 class USpringArmComponent;
 class UCameraComponent;
 class UDataAsset_InputConfig;
 struct FInputActionValue;
+class UHeroCombatComponent;
 /**
  * 
  */
@@ -22,6 +23,9 @@ class WARRIOR_API AWarriorHeroCharacter : public AWarriorBaseCharacter
 public:
 	AWarriorHeroCharacter();
 
+	FORCEINLINE UHeroCombatComponent* GetHeroCombatComponent() const {
+		return HeroCombatComponent;
+	}
 
 protected:
 
@@ -30,6 +34,7 @@ protected:
 	// ~End APawn Interface.
 
 	virtual void BeginPlay() override;
+
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
@@ -39,12 +44,16 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess= "true"))
 	UCameraComponent* FollowCamera;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess= "true"))
+	UHeroCombatComponent* HeroCombatComponent;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterData", meta = (AllowPrivateAccess= "true"))
 	UDataAsset_InputConfig* InputConfigDataAsset;
 
 	void Input_Move(const FInputActionValue& InputActionValue);
 	void Input_Look(const FInputActionValue& InputActionValue);
-
+	void Input_AbilityInputPressed(FGameplayTag InputTag);
+	void Input_AbilityInputReleased(FGameplayTag InputTag);
 
 
 };
