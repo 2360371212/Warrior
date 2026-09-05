@@ -34,7 +34,7 @@ AWarriorWeaponBase* UPawnCombatComponent::GetCharacterCarriedWeaponByTag(FGamepl
 	return nullptr;
 }
 
-AWarriorWeaponBase* UPawnCombatComponent::GetGetCharacterCurrentEquippedWeapon() const
+AWarriorWeaponBase* UPawnCombatComponent::GetCharacterCurrentEquippedWeapon() const
 {
 	if (!CurrentEquippedWeaponTag.IsValid())
 	{

@@ -29,7 +29,7 @@ public:
 	FGameplayTag CurrentEquippedWeaponTag;
 
 	UFUNCTION(BlueprintCallable, Category = "Warrior|Combat")
-	AWarriorWeaponBase* GetGetCharacterCurrentEquippedWeapon() const;
+	AWarriorWeaponBase* GetCharacterCurrentEquippedWeapon() const;
 
 
 
