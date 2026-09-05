@@ -12,9 +12,11 @@ class UCameraComponent;
 class UDataAsset_InputConfig;
 struct FInputActionValue;
 class UHeroCombatComponent;
+
 /**
  * 
  */
+
 UCLASS()
 class WARRIOR_API AWarriorHeroCharacter : public AWarriorBaseCharacter
 {
@@ -54,6 +56,4 @@ private:
 	void Input_Look(const FInputActionValue& InputActionValue);
 	void Input_AbilityInputPressed(FGameplayTag InputTag);
 	void Input_AbilityInputReleased(FGameplayTag InputTag);
-
-
 };
