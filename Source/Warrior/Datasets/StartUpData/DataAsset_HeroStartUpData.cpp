@@ -3,7 +3,7 @@
 
 #include "DataAsset_HeroStartUpData.h"
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
-#include "AbilitySystem/Abilities/WarriorGameplayAbility.h"
+#include "AbilitySystem/Abilities/WarriorHeroGameplayAbility.h"
 #include "WarriorTypes/WarriorStructTypes.h"
 
 
@@ -19,7 +19,7 @@ void UDataAsset_HeroStartUpData::GiveToAbilitySystemComponent(UWarriorAbilitySys
 		AbilitySpec.SourceObject = InASCToGive->GetAvatarActor();
 		AbilitySpec.Level = ApplyLevel;
 
-		AbilitySpec.DynamicAbilityTags.AddTag(AbilitySet.InputTag);
+		AbilitySpec.GetDynamicSpecSourceTags().AddTag(AbilitySet.InputTag);
 
 		InASCToGive->GiveAbility(AbilitySpec);
 	}

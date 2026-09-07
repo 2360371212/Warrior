@@ -3,7 +3,7 @@
 
 #include "WarriorAbilitySystemComponent.h"
 #include "WarriorTypes/WarriorStructTypes.h"
-#include "Abilities/WarriorGameplayAbility.h"
+#include "Abilities/WarriorHeroGameplayAbility.h"
 #include "GameplayAbilitySpecHandle.h"
 
 // check the Ability has been given.
@@ -15,7 +15,7 @@ void UWarriorAbilitySystemComponent::OnAbilityInputPressed(const FGameplayTag& I
 	}
 	for (const FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
 	{
-		if (!AbilitySpec.DynamicAbilityTags.HasTagExact(InputTag)) continue;
+		if (!AbilitySpec.GetDynamicSpecSourceTags().HasTagExact(InputTag)) continue;
 		TryActivateAbility(AbilitySpec.Handle);
 	}
 }
@@ -37,7 +37,7 @@ void UWarriorAbilitySystemComponent::GrantHeroWeaponAbilities(const TArray<FWarr
 		FGameplayAbilitySpec AbilitySpec(AbilitySet.AbilityToGrant);
 		AbilitySpec.SourceObject = GetAvatarActor();
 		AbilitySpec.Level = ApplyLevel;
-		AbilitySpec.DynamicAbilityTags.AddTag(AbilitySet.InputTag);
+		AbilitySpec.GetDynamicSpecSourceTags().AddTag(AbilitySet.InputTag);
 
 		OutGrantedAbilitySpecHandles.AddUnique(GiveAbility(AbilitySpec));
 	}
