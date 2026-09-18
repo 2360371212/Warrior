@@ -19,5 +19,4 @@ public:
 	// To Get the speed in the HeroAnimInstance
 	UFUNCTION(BlueprintPure, meta = (BlueprintThreadSafe))
 	UWarriorHeroAnimInstance* GetWarriorHeroAnimInstance() const;
-
 };

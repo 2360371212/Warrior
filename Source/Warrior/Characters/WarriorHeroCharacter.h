@@ -29,6 +29,10 @@ public:
 		return HeroCombatComponent;
 	}
 
+	// ~Begin IPawnCombatComponent.
+	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
+	// ~End IPawnCombatComponent.
+
 protected:
 
 	// ~Begin APawn Interface.

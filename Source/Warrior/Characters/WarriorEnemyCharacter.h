@@ -18,10 +18,13 @@ class WARRIOR_API AWarriorEnemyCharacter : public AWarriorBaseCharacter
 public:
 	AWarriorEnemyCharacter();
 
-	FORCEINLINE UEnemyCombatComponent* GetHeroCombatComponent() const {
+	FORCEINLINE UEnemyCombatComponent* GetEnemyCombatComponent() const {
 		return EnemyCombatComponent;
 	}
 
+	// ~Begin IPawnCombatComponent.
+	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
+	// ~End IPawnCombatComponent.
 
 protected:
 
