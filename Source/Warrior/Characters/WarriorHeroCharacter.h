@@ -12,13 +12,14 @@ class UCameraComponent;
 class UDataAsset_InputConfig;
 struct FInputActionValue;
 class UHeroCombatComponent;
+class UHeroUIComponent;
 
 /**
  * 
  */
 
 UCLASS()
-class WARRIOR_API AWarriorHeroCharacter : public AWarriorBaseCharacter
+class WARRIOR_API AWarriorHeroCharacter : public AWarriorBaseCharacter 
 {
 	GENERATED_BODY()
 
@@ -31,7 +32,13 @@ public:
 
 	// ~Begin IPawnCombatComponent.
 	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
+
 	// ~End IPawnCombatComponent.
+
+	virtual UPawnUIComponent* GetPawnUIComponent() const override;
+	virtual UHeroUIComponent* GetHeroUIComponent() const override;
+
+
 
 protected:
 
@@ -52,6 +59,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess= "true"))
 	UHeroCombatComponent* HeroCombatComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI", meta = (AllowPrivateAccess= "true"))
+	UHeroUIComponent* HeroUIComponent;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterData", meta = (AllowPrivateAccess= "true"))
 	UDataAsset_InputConfig* InputConfigDataAsset;
