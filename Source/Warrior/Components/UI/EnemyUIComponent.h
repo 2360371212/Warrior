@@ -13,5 +13,5 @@ UCLASS()
 class WARRIOR_API UEnemyUIComponent : public UPawnUIComponent
 {
 	GENERATED_BODY()
-	
+public:
 };
