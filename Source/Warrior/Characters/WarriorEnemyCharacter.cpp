@@ -71,12 +71,14 @@ void AWarriorEnemyCharacter::BeginPlay()
 	}
 }
 
+// 被控制器控制时调用
 void AWarriorEnemyCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 	InitEnemyStartUpData();
 }
 
+// 授予Enemy所对应的ability
 void AWarriorEnemyCharacter::InitEnemyStartUpData()
 {
 	if (CharacterStartUpData.IsNull())

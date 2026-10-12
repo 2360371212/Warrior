@@ -23,5 +23,6 @@ public:
 	// ~End IGenericTeamAgentInterface.
 
 private:
+	// 团队ID
 	FGenericTeamId HeroTeamID;
 };
