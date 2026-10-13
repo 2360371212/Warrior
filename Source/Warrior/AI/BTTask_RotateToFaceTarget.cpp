@@ -27,7 +27,6 @@ UBTTask_RotateToFaceTarget::UBTTask_RotateToFaceTarget()
 void UBTTask_RotateToFaceTarget::InitializeFromAsset(UBehaviorTree& Asset)
 {
 	Super::InitializeFromAsset(Asset);
-
 	
 	if (UBlackboardData* BBAsset = GetBlackboardAsset())
 	{
