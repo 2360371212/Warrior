@@ -8,9 +8,14 @@
 void UDataAsset_StartUpDataBase::GiveToAbilitySystemComponent(UWarriorAbilitySystemComponent* InASCToGive, int32 ApplyLevel)
 {
 	check(InASCToGive);
+
+	// 授予初始就激活的能力
 	GrantAbility(ActivateOnGivenAbilityes, InASCToGive, ApplyLevel);
+
+	// 授予战斗反馈能力
 	GrantAbility(ReactiveAbilities, InASCToGive, ApplyLevel);
 
+	// 授予GameplayEffects
 	if (!StartUpGameplayEffects.IsEmpty())
 	{
 		for (const TSubclassOf<UGameplayEffect>& EffectClass : StartUpGameplayEffects)
@@ -35,6 +40,7 @@ void UDataAsset_StartUpDataBase::GrantAbility(TArray<TSubclassOf<UWarriorGamepla
 			continue;
 		}
 
+		// 对Gameplay Ability进行封装
 		FGameplayAbilitySpec AbilitySpec(Ability);
 		AbilitySpec.SourceObject = InASCToGive->GetAvatarActor();
 		AbilitySpec.Level = ApplyLevel;

@@ -18,6 +18,7 @@ class WARRIOR_API UDataAsset_EnemyStartUpData : public UDataAsset_StartUpDataBas
 public:
 	virtual void GiveToAbilitySystemComponent(UWarriorAbilitySystemComponent* InASCToGive, int32 ApplyLevel = 1) override;
 private:
+	// 敌人战斗能力
 	UPROPERTY(EditDefaultsOnly, Category = "StartUpData")
 	TArray<TSubclassOf<UWarriorEnemyGameplayAbility>> EnemyCombatAbilities;
 };

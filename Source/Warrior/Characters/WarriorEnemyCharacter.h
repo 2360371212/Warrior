@@ -45,10 +45,8 @@ protected:
 	virtual void PossessedBy(AController* NewController) override;
 	// ~End APawn Interface.
 
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combato")
 	UEnemyCombatComponent* EnemyCombatComponent;
-
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI")
 	UEnemyUIComponent* EnemyUIComponent;

@@ -3,6 +3,8 @@
 
 #include "AbilitySystem/Abilities/WarriorEnemyGameplayAbility.h"
 #include "Characters/WarriorEnemyCharacter.h"
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "WarriorGameplayTags.h"
 
 AWarriorEnemyCharacter* UWarriorEnemyGameplayAbility::GetEnemyCharacterFromActorInfo()
 {
@@ -17,4 +19,29 @@ AWarriorEnemyCharacter* UWarriorEnemyGameplayAbility::GetEnemyCharacterFromActor
 UEnemyCombatComponent* UWarriorEnemyGameplayAbility::GetEnemyCombatComponentFromActorInfo()
 {
 	return GetEnemyCharacterFromActorInfo()->GetEnemyCombatComponent();
+}
+
+FGameplayEffectSpecHandle UWarriorEnemyGameplayAbility::MakeEnemyDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass, const FScalableFloat& InDamageScalableFloat)
+{
+	check(EffectClass);
+
+	// 创建上下文句柄
+	FGameplayEffectContextHandle ContextHandle = GetWarriorAbilitySystemComponentFromActorInfo()->MakeEffectContext();
+	ContextHandle.SetAbility(this);
+	ContextHandle.AddSourceObject(GetAvatarActorFromActorInfo());
+	ContextHandle.AddInstigator(GetAvatarActorFromActorInfo(), GetAvatarActorFromActorInfo());
+
+	// Create the Handle of GameplayEffectSpec
+	FGameplayEffectSpecHandle EffectSpecHandle = GetWarriorAbilitySystemComponentFromActorInfo()->MakeOutgoingSpec(
+		EffectClass,
+		GetAbilityLevel(),
+		ContextHandle
+	);
+
+	EffectSpecHandle.Data->SetSetByCallerMagnitude(
+		WarriorGameplayTags::Shared_SetByCaller_BaseDamage,
+		InDamageScalableFloat.GetValueAtLevel(GetAbilityLevel())
+	);
+
+	return EffectSpecHandle;
 }

@@ -20,6 +20,7 @@ public:
 	virtual void GiveToAbilitySystemComponent(UWarriorAbilitySystemComponent* InASCToGive, int32 ApplyLevel = 1) override;
 
 private:
+	// 定义英雄属性集 
 	UPROPERTY(EditDefaultsOnly, Category = "StartUpData", meta = (TitleProperty = "InputTag"))
 	TArray<FWarriorHeroAbilitySet> HeroStartUpAbilitySets;
 };

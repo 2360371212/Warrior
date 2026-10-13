@@ -45,5 +45,5 @@ void UEnemyCombatComponent::OnHitTargetActor(AActor* HitActor)
 
 void UEnemyCombatComponent::OnWeaponPulledFromTargetActor(AActor * InteractedActor)
 {
-	
+		
 }
