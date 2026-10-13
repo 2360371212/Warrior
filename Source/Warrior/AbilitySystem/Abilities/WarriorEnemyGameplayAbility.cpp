@@ -23,7 +23,7 @@ UEnemyCombatComponent* UWarriorEnemyGameplayAbility::GetEnemyCombatComponentFrom
 
 FGameplayEffectSpecHandle UWarriorEnemyGameplayAbility::MakeEnemyDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass, const FScalableFloat& InDamageScalableFloat)
 {
-	check(EffectClass);
+	check(EffectClass);  // 确认GE模板
 
 	// 创建上下文句柄
 	FGameplayEffectContextHandle ContextHandle = GetWarriorAbilitySystemComponentFromActorInfo()->MakeEffectContext();
@@ -37,6 +37,7 @@ FGameplayEffectSpecHandle UWarriorEnemyGameplayAbility::MakeEnemyDamageEffectSpe
 		GetAbilityLevel(),
 		ContextHandle
 	);
+
 
 	EffectSpecHandle.Data->SetSetByCallerMagnitude(
 		WarriorGameplayTags::Shared_SetByCaller_BaseDamage,
