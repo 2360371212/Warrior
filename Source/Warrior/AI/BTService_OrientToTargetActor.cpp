@@ -39,14 +39,20 @@ FString UBTService_OrientToTargetActor::GetStaticDescription() const
 void UBTService_OrientToTargetActor::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
+	UBlackboardComponent* BlackboardComponent = OwnerComp.GetBlackboardComponent();
+	AAIController* AIController = OwnerComp.GetAIOwner();
+	if (!IsValid(BlackboardComponent) || !IsValid(AIController))
+	{
+		return;
+	}
 	// 获取目标对象
-	UObject* ActorObject = OwnerComp.GetBlackboardComponent()->GetValueAsObject(InTargetActorKey.SelectedKeyName);
+	UObject* ActorObject = BlackboardComponent->GetValueAsObject(InTargetActorKey.SelectedKeyName);
 	
 	AActor* TargetActor = Cast<AActor>(ActorObject);
 
-	APawn* OwningPawn = OwnerComp.GetAIOwner()->GetPawn();
+	APawn* OwningPawn = AIController->GetPawn();
 
-	if (OwningPawn && TargetActor)
+	if (IsValid(OwningPawn) && IsValid(TargetActor))
 	{
 		// 计算旋转角度
 		const FRotator LookAtRot = UKismetMathLibrary::FindLookAtRotation(OwningPawn->GetActorLocation(), TargetActor->GetActorLocation());
