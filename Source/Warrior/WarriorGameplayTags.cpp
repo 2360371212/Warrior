@@ -9,16 +9,22 @@ namespace WarriorGameplayTags {
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Look, "InputTag.Look");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_EquipAxe, "InputTag.EquipAxe");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_UnequipAxe, "InputTag.UnequipAxe");
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Roll, "InputTag.Roll");
 
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_LightAttack_Axe, "InputTag.LightAttack.Axe");
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_HeavyAttack_Axe, "InputTag.HeavyAttack.Axe");
 
 	/* Player Tags*/
+
+	// Ability Tag
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Equip_Axe, "Player.Ability.Equip.Axe");
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Unequip_Axe, "Player.Ability.Unequip.Axe");
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attach_Light_Axe, "Player.Ability.Attach.Light.Axe");
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attach_Heavy_Axe, "Player.Ability.Attach.Heavy.Axe");
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_HitPause, "Player.Ability.HitPause");
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Roll, "Player.Ability.Roll");
+
+
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_Axe, "Player.Weapon.Axe");
 
@@ -33,6 +39,7 @@ namespace WarriorGameplayTags {
 	/* Status Tags */
 	// Jump from Light Attack to Heavy Attack
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_JumpToFinisher, "Player.Status.JumpToFinisher");
+	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Rolling, "Player.Status.Rolling");
 
 
 	/* Enemy tags */

@@ -6,7 +6,7 @@
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
 #include "Interfaces/PawnCombatInterface.h"
 #include "GenericTeamAgentInterface.h"
-
+#include "ScalableFloat.h"
 
 UWarriorAbilitySystemComponent* UWarriorFunctionLibrary::NativeGetWarriorASCFromActor(AActor* InActor)
 {
@@ -72,6 +72,11 @@ bool UWarriorFunctionLibrary::IsTargetPawnHostile(APawn* QueryPawn, APawn* Targe
 		return QueryTeamAgent->GetGenericTeamId() != TargetTeamAgent->GetGenericTeamId();
 	}
 	return false;
+}
+
+float UWarriorFunctionLibrary::GetScalableFloatValueAtLevel(const FScalableFloat& InScalableFloat, float InLevel)
+{
+	return InScalableFloat.GetValueAtLevel(InLevel);
 }
 
 
