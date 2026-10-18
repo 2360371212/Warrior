@@ -32,13 +32,15 @@ inline void UWarriorInputComponent::BindNativeInputAction(const UDataAsset_Input
 	}
 }
 
+// 用于按键能力绑定激活与取消
 template<class UserObject, typename CallbackFunc>
 inline void UWarriorInputComponent::BindAbilityInputAction(const UDataAsset_InputConfig* InInputConfig, UserObject* ContextObject, CallbackFunc InputPressedFunc, CallbackFunc InputReleasedFunc)
 {
 	checkf(InInputConfig, TEXT("Input Config data asset is null"));
 	for (const FWarriorInputActionConfig& AbilityInputActionConfig : InInputConfig->AbilityInputActions) {
 		if (!AbilityInputActionConfig.IsValid()) continue;
-
+		
+		// 委托绑定与参数传入
 		BindAction(AbilityInputActionConfig.InputAction, ETriggerEvent::Started, ContextObject, InputPressedFunc, AbilityInputActionConfig.InputTag);
 		BindAction(AbilityInputActionConfig.InputAction, ETriggerEvent::Completed, ContextObject, InputReleasedFunc, AbilityInputActionConfig.InputTag);
 	}

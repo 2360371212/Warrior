@@ -5,6 +5,7 @@
 #include "WarriorTypes/WarriorStructTypes.h"
 #include "Abilities/WarriorHeroGameplayAbility.h"
 #include "GameplayAbilitySpecHandle.h"
+#include "WarriorGameplayTags.h"
 
 // check the Ability has been given.
 void UWarriorAbilitySystemComponent::OnAbilityInputPressed(const FGameplayTag& InputTag)
@@ -22,7 +23,19 @@ void UWarriorAbilitySystemComponent::OnAbilityInputPressed(const FGameplayTag& I
 
 void UWarriorAbilitySystemComponent::OnAbilityInputReleased(const FGameplayTag & InputTag)
 {
-	
+	if (!InputTag.IsValid() || !InputTag.MatchesTag(WarriorGameplayTags::InputTag_MustBeHeld))
+	{
+		return;
+	}
+
+	// 当能力标签必须被按住时,当能力释放就会被取消
+	for (const FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
+	{
+		if (AbilitySpec.GetDynamicSpecSourceTags().HasTagExact(InputTag) && AbilitySpec.IsActive())
+		{
+			CancelAbilityHandle(AbilitySpec.Handle);
+		}
+	}
 
 }
 
