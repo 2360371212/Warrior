@@ -5,6 +5,8 @@
 #include "Items/Weapons/WarriorHeroWeapon.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "WarriorGameplayTags.h"
+#include "WarriorFunctionLibrary.h"
+
 
 #include "WarriorDebugHelper.h"
 

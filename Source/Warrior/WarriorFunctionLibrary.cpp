@@ -27,7 +27,7 @@ void UWarriorFunctionLibrary::AddGameplayTagToActorIfNone(AActor* InActor, FGame
 
 }
 
-void UWarriorFunctionLibrary::RemoveGameplayTagFromActorIfFound(AActor * InActor, FGameplayTag TagToRemove)
+void UWarriorFunctionLibrary::RemoveGameplayTagFromActorIfFound(AActor* InActor, FGameplayTag TagToRemove)
 {
 	UWarriorAbilitySystemComponent* ASC = NativeGetWarriorASCFromActor(InActor);
 	if (ASC->HasMatchingGameplayTag(TagToRemove))
@@ -69,7 +69,7 @@ bool UWarriorFunctionLibrary::IsTargetPawnHostile(APawn* QueryPawn, APawn* Targe
 {
 	check(QueryPawn && TargetPawn);
 	IGenericTeamAgentInterface* QueryTeamAgent = Cast<IGenericTeamAgentInterface>(QueryPawn->GetController());
-	IGenericTeamAgentInterface* TargetTeamAgent = Cast<IGenericTeamAgentInterface>(TargetPawn ->GetController());
+	IGenericTeamAgentInterface* TargetTeamAgent = Cast<IGenericTeamAgentInterface>(TargetPawn->GetController());
 	if (QueryTeamAgent && TargetTeamAgent)
 	{
 		return QueryTeamAgent->GetGenericTeamId() != TargetTeamAgent->GetGenericTeamId();
@@ -89,7 +89,7 @@ FGameplayTag UWarriorFunctionLibrary::ComputeHitReactDirectionTag(AActor* InAtta
 	const FVector VictimToAttackerNormalized = (InAttacker->GetActorLocation() - InVictim->GetActorLocation()).GetSafeNormal();
 
 	const float DotResult = FVector::DotProduct(VictimForward, VictimToAttackerNormalized);
-	
+
 	OutAngleDifference = UKismetMathLibrary::DegAcos(DotResult);
 
 	const FVector CrossResult = FVector::CrossProduct(VictimForward, VictimToAttackerNormalized);
@@ -104,10 +104,10 @@ FGameplayTag UWarriorFunctionLibrary::ComputeHitReactDirectionTag(AActor* InAtta
 	{
 		return WarriorGameplayTags::Shared_Status_HitReact_Front;
 	}
-	else if(OutAngleDifference >= 45.f && OutAngleDifference <= 135.f) {
+	else if (OutAngleDifference >= 45.f && OutAngleDifference <= 135.f) {
 		return WarriorGameplayTags::Shared_Status_HitReact_Right;
 	}
-	else if(OutAngleDifference <= -45.f && OutAngleDifference >= -135.f)
+	else if (OutAngleDifference <= -45.f && OutAngleDifference >= -135.f)
 	{
 		return WarriorGameplayTags::Shared_Status_HitReact_Left;
 	}
@@ -115,6 +115,15 @@ FGameplayTag UWarriorFunctionLibrary::ComputeHitReactDirectionTag(AActor* InAtta
 		return WarriorGameplayTags::Shared_Status_HitReact_Back;
 	}
 	return WarriorGameplayTags::Shared_Status_HitReact_Front;
+}
+
+bool UWarriorFunctionLibrary::IsValidBlock(AActor* InAttacker, AActor* InDefender)
+{
+	check(InAttacker && InDefender);
+
+	const float DotResult = FVector::DotProduct(InAttacker->GetActorForwardVector(), InDefender->GetActorForwardVector());
+
+	return DotResult < -0.f ? true : false;
 }
 
 
