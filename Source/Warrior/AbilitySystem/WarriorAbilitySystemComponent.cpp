@@ -17,7 +17,25 @@ void UWarriorAbilitySystemComponent::OnAbilityInputPressed(const FGameplayTag& I
 	for (const FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
 	{
 		if (!AbilitySpec.GetDynamicSpecSourceTags().HasTagExact(InputTag)) continue;
-		TryActivateAbility(AbilitySpec.Handle);
+
+		// 判定输入标签是否是可切换的
+		if (InputTag.MatchesTag(WarriorGameplayTags::InputTag_Toggleable))
+		{
+			// 如果是激活状态这取消状态
+			if (AbilitySpec.IsActive())
+			{
+				CancelAbilityHandle(AbilitySpec.Handle);
+			}
+			else {
+				TryActivateAbility(AbilitySpec.Handle);
+			}
+		}
+		// 常规能力
+		else {
+			TryActivateAbility(AbilitySpec.Handle);
+		}
+
+
 	}
 }
 
