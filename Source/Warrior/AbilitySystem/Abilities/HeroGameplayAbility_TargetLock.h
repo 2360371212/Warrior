@@ -36,8 +36,13 @@ private:
 	void DrawTargetLockWidget();
 	void SetTargetLockWidgetPosition();
 
+
+	void InitTargetLockMovement();
+
 	void CancelTargetLockAbility();
 	void ClearUp();
+
+	void ResetTargetLockMovement();
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
 	float BoxTraceDistance = 5000.f;
@@ -54,6 +59,12 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
 	TSubclassOf<UWarriorWidgetBase> TargetLockWidgetClass;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
+	float TargetLockRotationInterSpeed = 5.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
+	float TargetLockMaxWalkSpeed = 150.f;
+
 	UPROPERTY()
 	TArray<AActor*> AvailableActorsToLock;
 
@@ -65,5 +76,10 @@ private:
 
 	UPROPERTY()
 	FVector2D TargetLockWidgetSize = FVector2D::ZeroVector;
+
+	UPROPERTY()
+	float CachedDefaultMaxWalkSpeed = 0.f;
+
+
 
 };
