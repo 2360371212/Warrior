@@ -7,6 +7,7 @@
 #include "HeroGameplayAbility_TargetLock.generated.h"
 
 class UWarriorWidgetBase;
+class UInputMappingContext;
 /**
  * 
  */
@@ -25,6 +26,10 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void OnTargetLockTick(float DeltaTime);
 
+
+	UFUNCTION(BlueprintCallable)
+	void SwitchTarget(const FGameplayTag& InSwitchDirectionTag);
+
 private:
 	
 	void TryLockOnTarget();
@@ -32,17 +37,21 @@ private:
 	void GetAvailiableActorsToLock();
 
 	AActor* GetNearestTargetFromAvailableActors(const TArray<AActor*>& InAvailableActors);
+	void GetAvailiableActorsAroundTarget(TArray<AActor*>& OutActorsOnLeft, TArray<AActor*>& OutActorsOnRight);
 
 	void DrawTargetLockWidget();
 	void SetTargetLockWidgetPosition();
 
-
 	void InitTargetLockMovement();
+	void ResetTargetLockMovement();
+
+	void InitTargetLockMappingContext();
+	void ResetTargetLockMappingContext();
+
 
 	void CancelTargetLockAbility();
 	void ClearUp();
 
-	void ResetTargetLockMovement();
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
 	float BoxTraceDistance = 5000.f;
@@ -65,6 +74,12 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
 	float TargetLockMaxWalkSpeed = 150.f;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
+	UInputMappingContext* TargetLockMappingContext;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Target Lock")
+	float TargetLockCameraOffsetDistance = 20.f;
+
 	UPROPERTY()
 	TArray<AActor*> AvailableActorsToLock;
 
@@ -79,6 +94,15 @@ private:
 
 	UPROPERTY()
 	float CachedDefaultMaxWalkSpeed = 0.f;
+
+	UPROPERTY()
+	bool bCachedOrientRotationToMovement = false;
+
+	UPROPERTY()
+	bool bCachedUseControllerDesiredRotation = false;
+
+	UPROPERTY()
+	bool bTargetLockMovementInitialized = false;
 
 
 
